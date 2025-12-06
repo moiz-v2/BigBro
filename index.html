@@ -1,150 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+        color: white;
+        background: black;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            overflow-x: hidden;
-            color: white;
-        }
+    /* HERO SECTION */
+    .hero {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: visible;
+    }
 
-        /* Fullscreen Background Video */
-        .hero {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-        }
+    /* BACKGROUND SLIDESHOW */
+    .slideshow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+    }
 
-        .hero video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            filter: brightness(60%);
-        }
+    .slideshow img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        filter: brightness(60%);
+        animation: fadeZoom 30s infinite;
+    }
 
-        /* Message on Top */
-        .hero-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 10;
-            animation: fadeIn 2s ease-out;
-        }
+    /* Timing for 5 images (6 sec each) */
+    .slideshow img:nth-child(1) { animation-delay: 0s; }
+    .slideshow img:nth-child(2) { animation-delay: 6s; }
+    .slideshow img:nth-child(3) { animation-delay: 12s; }
+    .slideshow img:nth-child(4) { animation-delay: 18s; }
+    .slideshow img:nth-child(5) { animation-delay: 24s; }
 
-        .hero-text h1 {
-            font-size: 60px;
-            font-weight: 900;
-            text-shadow: 0 0 20px black;
-        }
+    /* Fade + slow zoom animation */
+    @keyframes fadeZoom {
+        0%   { opacity: 0; transform: scale(1); }
+        10%  { opacity: 1; transform: scale(1.05); }
+        30%  { opacity: 1; transform: scale(1.1); }
+        40%  { opacity: 0; transform: scale(1.1); }
+        100% { opacity: 0; transform: scale(1.1); }
+    }
 
-        .hero-text p {
-            font-size: 22px;
-            margin-top: 10px;
-            opacity: 0.9;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -40%); }
-            to   { opacity: 1; transform: translate(-50%, -50%); }
-        }
-
-        /* Scroll Down Indicator */
-        .scroll-down {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 28px;
-            animation: bounce 1.5s infinite;
-            text-shadow: 0 0 10px black;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50%      { transform: translateX(-50%) translateY(10px); }
-        }
-
-        /* Recap Video Section */
-        .video-section {
-            padding: 60px 0;
-            text-align: center;
-            background: black;
-        }
-
-        .video-section video {
-            width: 80%;
-            max-width: 800px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.3);
-            opacity: 0;
-            animation: fadeInVid 2s ease-out 0.5s forwards;
-        }
-
-        @keyframes fadeInVid {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-	/* HERO WITH GRADIENT FADE */
-	.hero {
-	position: relative;
-	height: 100vh;
-	width: 100%;
-	overflow: hidden;
-	}
-
-	.hero::after {
-	content: "";
+    /* MESSAGE ON TOP - LEFT ALIGN */
+    .hero-text {
 	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 200px; 
-	background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 100%);
-	pointer-events: none;
-	}
-	
-    </style>
+	top: 5%;
+	left: 5%;              /* fixed horizontal position */
+	transform: translateY(-50%); /* only vertical centering */
+	text-align: left;
+	z-index: 10;
+	max-width: 600px;
+	opacity: 0;
+	animation: fadeIn 1.5s ease-out 1.5s forwards, floatText 3s ease-in-out 2s infinite;
+    }
+    
+    .hero-text h1 {
+        font-size: 60px;
+        font-weight: 900;
+        text-shadow: 0 0 20px black;
+        margin-bottom: 20px;
+    }
+
+    .hero-text p {
+        font-size: 20px;
+        line-height: 1.6;
+        color: white;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(0); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatText {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-10px); }
+    }
+    
+    /* SCROLL DOWN ICON */
+    .scroll-down {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 28px;
+        z-index: 10;
+        animation: bounce 1.5s infinite;
+        text-shadow: 0 0 10px black;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50%      { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* VIDEO SECTION BELOW */
+    .video-section {
+        padding: 60px 0;
+        text-align: center;
+        background: black;
+        min-height: 400px;
+        z-index: 5;
+    }
+
+    .video-section video {
+        width: 80%;
+        max-width: 800px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        opacity: 0;
+        animation: fadeInVid 2s ease-out 0.5s forwards;
+    }
+
+    @keyframes fadeInVid {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
 </head>
 <body>
 
-    <!-- HERO WITH BACKGROUND VIDEO -->
-    <div class="hero">
+<!-- HERO SECTION -->
+<div class="hero">
 
-        <!-- Background Video -->
-        <video autoplay muted loop playsinline>
-            <source src="Background.mp4" type="video/mp4">
-        </video>
-
-        <!-- Text On Top -->
-        <div class="hero-text">
-            <h1>Happy Birthday, Brother! 🎉</h1>
-            <p>Keep smiling, keep exploring, keep shining ❤️</p>
-        </div>
-
-        <!-- Scroll indicator -->
-        <div class="scroll-down">⬇️</div>
-
+    <!-- BACKGROUND SLIDESHOW -->
+    <div class="slideshow">
+        <img src="bg1.jpg" alt="">
+        <img src="bg2.jpg" alt="">
+        <img src="bg3.jpg" alt="">
+        <img src="bg4.jpg" alt="">
+        <img src="bg5.jpg" alt="">
     </div>
 
-    <!-- RECAP VIDEO BELOW -->
-    <div class="video-section">
-        <video controls>
-            <source src="Rivers.mp4" type="video/mp4">
-        </video>
+    <!-- LEFT-ALIGNED TEXT -->
+    <div class="hero-text">
+        <h1>Happy Birthday Mr.Right 🎉</h1>
+        <p>
+            Allah knew I needed someone patient enough to understand me,<br>
+            strong enough to carry what I can't say out loud,<br>
+            gentle enough to love me through every storm.<br><br>
+            You are not just my partner.<br>
+            You are my answered prayer.<br><br>
+            Thank you for being the best of my life.<br>
+            Happiest 8th Dec to you Mr.Right.<br>
+            Hina loves you a lot and will be by your side in this duniya and hereafter 💞
+        </p>
     </div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-down">⬇️</div>
+
+</div>
+
+<!-- RECAP VIDEO -->
+<div class="video-section">
+    <video controls>
+        <source src="Rivers.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
 
 </body>
 </html>
