@@ -60,15 +60,22 @@
 
     /* MESSAGE ON TOP - LEFT ALIGN */
     .hero-text {
-	position: absolute;
-	top: 5%;
-	left: 5%;              /* fixed horizontal position */
-	transform: translateY(-50%); /* only vertical centering */
-	text-align: left;
-	z-index: 10;
-	max-width: 600px;
-	opacity: 0;
-	animation: fadeIn 1.5s ease-out 1.5s forwards, floatText 3s ease-in-out 2s infinite;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    z-index: 10;
+    max-width: 600px;
+
+    /* NEW background box */
+    background: rgba(0, 0, 0, 0.45);   /* semi-transparent black */
+    padding: 25px 35px; /* default 25 */
+    border-radius: 20px;               /* curved corners */
+    backdrop-filter: blur(4px);        /* optional glass effect */
+
+    /* Your animations stay the same */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 1.5s forwards,
+    floatText 3s ease-in-out 2s infinite;
     }
     
     .hero-text h1 {
@@ -130,12 +137,14 @@
     }
 
     .video-section video {
-        width: 80%;
-        max-width: 800px;
+        width: 50%;
+        max-width: 500px;
         border-radius: 15px;
         box-shadow: 0 0 20px rgba(255,255,255,0.3);
         opacity: 0;
         animation: fadeInVid 2s ease-out 0.5s forwards;
+        display: block;       /* avoids inline extra space */
+        margin: 0 auto;       /* ensures perfect centering */
     }
 
     @keyframes fadeInVid {
@@ -167,7 +176,7 @@
             gentle enough to love me through every storm.<br><br>
             You are not just my partner.<br>
             You are my answered prayer.<br><br>
-            Thank you for being the best of my life.<br>
+            Thank you for being the best part of my life.<br>
             Happiest 8th Dec to you Mr.Right.<br>
             Hina loves you a lot and will be by your side in this duniya and hereafter 💞
         </p>
@@ -181,7 +190,7 @@
 <!-- RECAP VIDEO -->
 <div class="video-section">
     <video controls>
-        <source src="Rivers.mp4" type="video/mp4">
+        <source src="video.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
